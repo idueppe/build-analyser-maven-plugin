@@ -5,13 +5,13 @@ This plugin prints for each maven lifecycle phases the configured plugin goals.
 
 Supported Goals
 ---------------------------
-print
-help
+* print
+* help
 
 Example:
-`
-[INFO] Project: Maven Build Analyser Plugin
-[INFO] ------------------------------------------------------------------------
+
+`[INFO] Project: Maven Build Analyser Plugin`
+`[INFO] ------------------------------------------------------------------------`
 [INFO] the plugin org.apache.maven.plugins:maven-plugin-plugin:2.9:helpmojo is executed in its default phase.
 [INFO] 
 [INFO] validate:
