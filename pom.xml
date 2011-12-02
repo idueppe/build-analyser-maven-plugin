@@ -45,6 +45,21 @@
 	</organization>
 
 	<inceptionYear>2011</inceptionYear>
+	
+	<scm>
+		<connection>
+			scm:git:git@github.com:idueppe/build-analyser-maven-plugin.git
+		</connection>
+		<developerConnection>
+			scm:git:git@github.com:idueppe/build-analyser-maven-plugin.git
+		</developerConnection>
+		<url>https://github.com/idueppe/build-analyser-maven-plugin</url>
+	</scm>
+	
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/idueppe/build-analyser-maven-plugin/issues</url>
+	</issueManagement>
 
 	<dependencies>
 		<dependency>

@@ -118,7 +118,7 @@ public class LifecyclePrintMojo extends AbstractMojo {
 		} else {
 			List<String> pluginGoals = getLifecylcePhase(execution.getPhase());
 			String isInherited = (execution.getInherited() != null) ? ", inherited"	: "";
-			pluginGoals.add(gav(plugin) + ":" + goal + " (executionId:"	+ execution.getId() + isInherited + ")");
+			pluginGoals.add(gav(plugin) + ":" + goal + " (executionId:" + execution.getId() + isInherited + ")");
 		}
 	}
 
