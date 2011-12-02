@@ -112,22 +112,20 @@ public class LifecyclePrintMojo extends AbstractMojo {
 		}
 	}
 
-	private void addGoalToLifecyle(String goal, Plugin plugin,
-			PluginExecution execution) {
+	private void addGoalToLifecyle(String goal, Plugin plugin, PluginExecution execution) {
 		if (execution.getPhase() == null) {
-			getLog().info("the plugin "+ gav(plugin)+":"+goal+" is executed in its default phase.");
+			getLog().info("the plugin "+ plugin.getId()+":"+goal+" is executed in its default phase.");
 			// TODO need to start analysis here... what is the default phase of the goal?
 		} else {
 			List<String> pluginGoals = getLifecylcePhase(execution.getPhase());
-			String isInherited = (execution.getInherited() != null) ? ", inherited"	: "";
-			pluginGoals.add(gav(plugin) + ":" + goal + " (executionId:" + execution.getId() + isInherited + ")");
+
+			String text = plugin.getArtifactId()+":"+goal;
+			text += "\t("+ plugin.getId()+" ,executionId="+execution.getId()+")";
+			
+			pluginGoals.add(text);
 		}
 	}
 
-	private String gav(Plugin plugin) {
-		return plugin.getGroupId() + ":" + plugin.getArtifactId() + ":"
-				+ plugin.getVersion();
-	}
 
 	private List<String> getLifecylcePhase(String phase) {
 		if (!phaseMapping.containsKey(phase)) {
