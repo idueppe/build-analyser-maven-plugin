@@ -9,7 +9,7 @@ print
 help
 
 Example:
-
+`
 [INFO] Project: Maven Build Analyser Plugin
 [INFO] ------------------------------------------------------------------------
 [INFO] the plugin org.apache.maven.plugins:maven-plugin-plugin:2.9:helpmojo is executed in its default phase.
@@ -80,4 +80,4 @@ Example:
 [INFO] site-deploy:
 [INFO] 	org.apache.maven.plugins:maven-site-plugin:2.0.1:deploy (executionId:default-deploy)
 [INFO] 
- 
+`
