@@ -25,6 +25,32 @@
 		<maven>3.0.3</maven>
 	</prerequisites>
 
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>oss-sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>oss-sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<site>
+			<id>github-project-site</id>
+			<url>gitsite:git@github.com/idueppe/build-analyser-maven-plugin.git</url>
+		</site>
+	</distributionManagement>
+
 	<developers>
 		<developer>
 			<id>idueppe</id>
@@ -32,6 +58,7 @@
 			<email>ingo.dueppe@crowdcode.de</email>
 			<roles>
 				<role>Lead</role>
+				<role>Developer</role>
 			</roles>
 			<organization>crowdcode</organization>
 			<organizationUrl>http://www.crowdcode.de</organizationUrl>
@@ -80,27 +107,26 @@
 		</dependency>
 	</dependencies>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>2.9</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
-			</plugin>
-		</plugins>
-	</reporting>
-
 	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-gitexe</artifactId>
+				<version>1.3</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>1.3</version>
+			</extension>
+			<!-- FIXME m2e eclipse cannot handle this extension and profiles doesn't support extensions
+			<extension>
+				<groupId>org.kathrynhuxtable.maven.wagon</groupId>
+				<artifactId>wagon-gitsite</artifactId>
+				<version>0.4-SNAPSHOT</version>
+			</extension>
+			 -->
+		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -180,13 +206,6 @@
 							</configuration>
 						</plugin>
 						<plugin>
-							<artifactId>maven-surefire-report-plugin</artifactId>
-							<version>2.10</version>
-							<configuration>
-								<showSuccess>true</showSuccess>
-							</configuration>
-						</plugin>
-						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>findbugs-maven-plugin</artifactId>
 							<version>2.3.2</version>
@@ -208,5 +227,28 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
