@@ -120,7 +120,7 @@ public class LifecyclePrintMojo extends AbstractMojo {
 			List<String> pluginGoals = getLifecylcePhase(execution.getPhase());
 
 			String text = plugin.getArtifactId()+":"+goal;
-			text += "\t("+ plugin.getId()+" ,executionId="+execution.getId()+")";
+			text += "\t("+ plugin.getId()+", executionId="+execution.getId()+")";
 			
 			pluginGoals.add(text);
 		}
