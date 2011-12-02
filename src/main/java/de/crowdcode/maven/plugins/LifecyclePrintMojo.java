@@ -36,6 +36,8 @@ import org.apache.maven.project.MavenProject;
  * Goal prints out the lifecycles of a project with the attached plugins and
  * there goals.
  * 
+ * Display lifecycle phases and plugin goals.<br/> Call <pre>  mvn build-analyser:print</pre> to display the phases and goals.
+ * 
  * @goal print
  * 
  */

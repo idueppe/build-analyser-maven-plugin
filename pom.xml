@@ -45,7 +45,7 @@
 	</organization>
 
 	<inceptionYear>2011</inceptionYear>
-	
+
 	<scm>
 		<connection>
 			scm:git:git@github.com:idueppe/build-analyser-maven-plugin.git
@@ -55,7 +55,7 @@
 		</developerConnection>
 		<url>https://github.com/idueppe/build-analyser-maven-plugin</url>
 	</scm>
-	
+
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/idueppe/build-analyser-maven-plugin/issues</url>
@@ -79,6 +79,26 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<build>
 		<plugins>
@@ -111,6 +131,80 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<inherited>true</inherited>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.4</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-dependency-plugin</artifactId>
+							<version>2.3</version>
+							<configuration>
+								<repositoryUrl>--</repositoryUrl>
+								<artifactItems />
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-plugin-plugin</artifactId>
+							<version>2.9</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.8</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-jxr-plugin</artifactId>
+							<version>2.3</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<version>2.6</version>
+							<configuration>
+								<targetJdk>1.6</targetJdk>
+								<format>xml</format>
+								<linkXref>true</linkXref>
+								<sourceEncoding>UTF-8</sourceEncoding>
+								<minimumTokens>100</minimumTokens>
+								<excludes>
+									<exclude>**/generated/*.java</exclude>
+								</excludes>
+							</configuration>
+						</plugin>
+						<plugin>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+							<version>2.10</version>
+							<configuration>
+								<showSuccess>true</showSuccess>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>findbugs-maven-plugin</artifactId>
+							<version>2.3.2</version>
+						</plugin>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>taglist-maven-plugin</artifactId>
+							<version>2.4</version>
+							<configuration>
+								<tags>
+									<tag>FIXME</tag>
+									<tag>TODO</tag>
+									<tag>@deprecated</tag>
+								</tags>
+							</configuration>
+						</plugin>
+					</reportPlugins>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
